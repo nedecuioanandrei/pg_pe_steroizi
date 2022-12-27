@@ -4,9 +4,8 @@
 #include <glm/glm.hpp>
 #include <glm/gtx/transform.hpp>
 
-namespace ned {
 class Camera {
- private:
+ public:
   Camera(const glm::vec3& pos,
          float fov,
          float aspect,
@@ -23,5 +22,4 @@ class Camera {
   glm::vec3 forward;
   glm::vec3 up;
 };
-};  // namespace ned
 #endif

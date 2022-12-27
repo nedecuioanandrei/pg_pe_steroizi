@@ -1,11 +1,11 @@
-ifndef OBJ_LOADER_H_INCLUDED
-#define OBJ_LOADER_H_INCLUDED
+#ifndef OBJECT_LOADER_H_INCLUDED
+#define OBJECT_LOADER_H_INCLUDED
 
 #include <glm/glm.hpp>
 #include <string>
 #include <vector>
 
-    struct OBJIndex {
+struct OBJIndex {
   unsigned int vertexIndex;
   unsigned int uvIndex;
   unsigned int normalIndex;
@@ -50,5 +50,4 @@ class OBJModel {
                          bool* hasUVs,
                          bool* hasNormals);
 };
-
 #endif  // OBJ_LOADER_H_INCLUDED

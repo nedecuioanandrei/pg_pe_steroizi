@@ -4,7 +4,7 @@ FLAGS = -Wall -pedantic -fsanitize=address -std=c++17 -DLOCAL=1
 INC = -I ../common/include 
 LOC_LIB = ../common/linux_x86_64/libGLEW.a -lglfw ../common/linux_x86_64/libassimp.a
 SYS_LIB = -lGL -lz 
-SRC = main.cpp src/camera.h src/debug.hpp src/mesh.cpp src/mesh.h src/object_loader.cpp src/object_loader.h src/shader.cpp src/shader.h src/texture.cpp src/texture.h src/transform.cpp src/transform.h src/util.hpp
+SRC = main.cpp src/camera.h src/mesh.h src/mesh.cpp src/object_loader.h src/object_loader.cpp src/shader.cpp src/shader.h src/transform.cpp src/transform.h
 all:
 	${CC} ${FLAGS} -o ${BIN} ${SRC} ${INC} ${LOC_LIB} ${SYS_LIB}
 

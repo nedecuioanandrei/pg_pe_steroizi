@@ -2,14 +2,11 @@
 #define MESH_INCLUDED_H
 
 #include <GL/glew.h>
-
 #include <glm/glm.hpp>
 #include <string>
 #include <vector>
+#include "object_loader.h"
 
-#include "obj_loader.h"
-
-namespace ned {
 struct Vertex {
  public:
   Vertex(const glm::vec3& pos,
@@ -56,5 +53,4 @@ class Mesh {
   GLuint m_vertexArrayBuffers[NUM_BUFFERS];
   unsigned int m_numIndices;
 };
-}  // namespace ned
 #endif

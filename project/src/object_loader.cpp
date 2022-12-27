@@ -3,7 +3,7 @@
 #include <iostream>
 #include <map>
 
-#include "obj_loader.h"
+#include "object_loader.h"
 
 static bool CompareOBJIndexPtr(const OBJIndex* a, const OBJIndex* b);
 static inline unsigned int FindNextChar(unsigned int start,

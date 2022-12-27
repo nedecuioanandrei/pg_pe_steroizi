@@ -1,7 +1,5 @@
 #include "mesh.h"
-
 #include <stdlib.h>
-
 #include <algorithm>
 #include <fstream>
 #include <iostream>

@@ -2,12 +2,10 @@
 #define SHADER_INCLUDED_H
 
 #include <GL/glew.h>
-
+#include <fstream>
 #include <string>
-
 #include "transform.h"
 
-namespace ned {
 class Shader {
  public:
   Shader(const std::string& filename);
@@ -30,6 +28,5 @@ class Shader {
   GLuint m_program;
   GLuint m_shaders[SHADER_COUNT];
   GLuint m_uniforms[UNIFORM_COUNT];
-}
-};  // namespace ned
+};
 #endif

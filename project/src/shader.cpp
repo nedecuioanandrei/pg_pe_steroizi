@@ -1,14 +1,10 @@
 #include "shader.h"
 
-#include <fstream>
-#include <iostream>
-
-namespace ned {
 Shader::Shader(const std::string& filename) {
   m_program = glCreateProgram();
-  m_shaders[0] = create_shader(LoadShader(filename + ".vs"), GL_VERTEX_SHADER);
+  m_shaders[0] = create_shader(load_shader(filename + ".vs"), GL_VERTEX_SHADER);
   m_shaders[1] =
-      create_shader(LoadShader(filename + ".fs"), GL_FRAGMENT_SHADER);
+      create_shader(load_shader(filename + ".fs"), GL_FRAGMENT_SHADER);
 
   for (unsigned int i = 0; i < SHADER_COUNT; ++i) {
     glAttachShader(m_program, m_shaders[i]);
@@ -21,10 +17,6 @@ Shader::Shader(const std::string& filename) {
   glLinkProgram(m_program);
   check_shader_error(m_program, GL_LINK_STATUS, true,
                      "Error linking shader program.");
-
-  glValidate(m_program);
-  check_shader_error(m_program, GL_VALIDATE_STATUS, true,
-                     "Invalid shader program.");
 
   m_uniforms[0] = glGetUniformLocation(m_program, "MVP");
   m_uniforms[1] = glGetUniformLocation(m_program, "Normal");
@@ -44,7 +36,7 @@ void Shader::bind() {
 }
 
 void Shader::update(const Transform& transform, const Camera& camera) {
-  glm::mat4 mvp = transform.get_mvp();
+  glm::mat4 mvp = transform.get_mvp(camera);
   glm::mat4 normal = transform.get_model();
 
   glUniformMatrix4fv(m_uniforms[0], 1, GL_FALSE, &mvp[0][0]);
@@ -54,7 +46,7 @@ void Shader::update(const Transform& transform, const Camera& camera) {
 
 std::string Shader::load_shader(const std::string& filename) {
   std::ifstream file;
-  file.open((filename).c_str());
+  file.open((filename).c_str(), std::ifstream::in);
 
   std::string output;
   std::string line;
@@ -65,7 +57,7 @@ std::string Shader::load_shader(const std::string& filename) {
       output.append(line + "\n");
     }
   } else {
-    fprintf(stderr, "Unable to load shader: %s \n", filename);
+    fprintf(stderr, "Unable to load shader: %s \n", filename.c_str());
   }
   return output;
 }
@@ -89,7 +81,7 @@ void Shader::check_shader_error(GLuint shader,
     } else {
       glGetShaderInfoLog(shader, sizeof(error), nullptr, error);
     }
-    fprintf(stderr, "%s: %s\n", error_message, error);
+    fprintf(stderr, "%s: %s\n", error_message.c_str(), error);
   }
 }
 
@@ -97,7 +89,7 @@ GLuint Shader::create_shader(const std::string text, unsigned int type) {
   GLuint shader = glCreateShader(type);
 
   if (shader == 0) {
-    fprintf(stderr, "Error compiling shader type: %d\n", type);
+    fprintf(stderr, "Error compiling shader type: %u\n", type);
   }
 
   const GLchar* p[1];
@@ -113,4 +105,3 @@ GLuint Shader::create_shader(const std::string text, unsigned int type) {
 
   return shader;
 }
-}  // namespace ned

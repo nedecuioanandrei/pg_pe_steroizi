@@ -6,7 +6,6 @@
 
 #include "camera.h"
 
-namespace ned {
 class Transform {
  public:
   Transform(const glm::vec3& pos = glm::vec3(),
@@ -16,7 +15,7 @@ class Transform {
     glm::mat4 pos_mat = glm::translate(pos);
     glm::mat4 scale_mat = glm::scale(scale);
     glm::mat4 rot_x = glm::rotate(rot.x, glm::vec3(1.0, 0.0, 0.0));
-    glm::mat4 rot_y = glm::rotate(rot.y, glm::vec3(0.0, 1.0. 0.0));
+    glm::mat4 rot_y = glm::rotate(rot.y, glm::vec3(0.0, 1.0, 0.0));
     glm::mat4 rot_z = glm::rotate(rot.x, glm::vec3(0.0, 0.0, 1.0));
     glm::mat4 rot_mat = rot_x * rot_y * rot_z;
     return pos_mat * rot_mat * scale_mat;
@@ -39,5 +38,4 @@ class Transform {
   glm::vec3 rot;
   glm::vec3 scale;
 };
-};  // namespace ned
 #endif
