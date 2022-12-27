@@ -10,7 +10,11 @@ class Transform {
  public:
   Transform(const glm::vec3& pos = glm::vec3(),
             const glm::vec3& rot = glm::vec3(),
-            const glm::vec3& scale = glm::vec3(1.0f, 1.0f, 1.0f));
+            const glm::vec3& scale = glm::vec3(1.0f, 1.0f, 1.0f)) {
+    this->pos = pos;
+    this->rot = rot;
+    this->scale = scale;
+  }
   inline glm::mat4 get_model() const {
     glm::mat4 pos_mat = glm::translate(pos);
     glm::mat4 scale_mat = glm::scale(scale);
